@@ -1,10 +1,41 @@
 {
-  "id" : null,
-  "numberOfColumns" : 0,
-  "offsetColumns" : 0,
-  "renderOrder" : 1,
-  "showInNotebook" : false,
-  "showInNotebookAt" : null,
-  "page" : null,
-  "audio" : null
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "audioComponent",
+  "description": "audioComponent",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "bool"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "audio": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  }
 }

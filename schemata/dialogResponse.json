@@ -1,7 +1,33 @@
 {
-  "id" : null,
-  "buttonText" : null,
-  "from" : null,
-  "to" : null,
-  "pageTransition" : null
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "dialogResponse",
+  "description": "dialogResponse",
+  "properties": {
+  "id" : {
+      "type": "null"
+    },
+  "buttonText" : {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+  "from" : {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+  "to" : {
+      "type": "string"
+    },
+  "pageTransition" : {
+      "type": [
+        "null",
+        "integer",
+        "string"
+      ]
+    }
+}
 }

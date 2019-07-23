@@ -1,11 +1,41 @@
 {
-  "id" : null,
-  "from" : null,
-  "receiveAfter" : {
-    "time" : 0,
-    "isAbsolute" : true
-  },
-  "page" : null,
-  "speech" : null,
-  "answers" : null
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "dialog",
+  "description": "dialog",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "from": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "receiveAfter": {
+      "type": "object",
+      "required": "time",
+      "properties": {
+        "time": {
+          "type": "number"
+        },
+        "isAbsolute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "speech": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "null"
+    }
+  }
 }

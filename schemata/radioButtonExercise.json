@@ -1,11 +1,47 @@
 {
-  "id" : null,
-  "numberOfColumns" : 0,
-  "offsetColumns" : 0,
-  "renderOrder" : 1,
-  "showInNotebook" : false,
-  "showInNotebookAt" : null,
-  "page" : null,
-  "descriptionForNotebook" : null,
-  "options" : null
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "http://github.com/uzh/marugoto-validator",
+  "title": "radioButtonExercise",
+  "description": "radioButtonExercise",
+  "properties": {
+    "id": {
+      "type": "null"
+    },
+    "numberOfColumns": {
+      "type": "integer"
+    },
+    "offsetColumns": {
+      "type": "integer"
+    },
+    "renderOrder": {
+      "type": "integer"
+    },
+    "showInNotebook": {
+      "type": "boolean"
+    },
+    "showInNotebookAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "page": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "descriptionForNotebook": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "options": {
+      "type": [
+        "null",
+        "array"
+      ]
+    }
+  }
 }
