@@ -1,0 +1,11 @@
+{
+  "id" : null,
+  "from" : null,
+  "receiveAfter" : {
+    "time" : 0,
+    "isAbsolute" : true
+  },
+  "page" : null,
+  "speech" : null,
+  "answers" : null
+}

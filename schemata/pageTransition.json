@@ -1,0 +1,22 @@
+{
+  "id" : null,
+  "from" : null,
+  "to" : null,
+  "buttonText" : null,
+  "time" : {
+    "time" : 0
+  },
+  "money" : {
+    "amount" : 0.0
+  },
+  "criteria" : [ {
+    "pageCriteria" : null,
+    "exerciseCriteria" : null,
+    "mailCriteria" : null,
+    "affectedExercise" : null,
+    "affectedPage" : null,
+    "affectedPagesIds" : null,
+    "affectedMail" : null,
+    "affectedDialogResponse" : null
+  } ]
+}

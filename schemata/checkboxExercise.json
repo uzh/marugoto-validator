@@ -1,0 +1,13 @@
+{
+  "id" : null,
+  "numberOfColumns" : 0,
+  "offsetColumns" : 0,
+  "renderOrder" : 1,
+  "showInNotebook" : false,
+  "showInNotebookAt" : null,
+  "page" : null,
+  "descriptionForNotebook" : null,
+  "options" : null,
+  "solutionMode" : "correct",
+  "minimumSelected" : null
+}
