@@ -10,4 +10,4 @@ $ maruval --mkdocs=true/false --virtualenv=true/false junglebook
 
 from maruval.maruval import validate, _parse_cmdline_args
 
-validate(*_parse_cmdline_args())
+validate(**_parse_cmdline_args())

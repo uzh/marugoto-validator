@@ -11,9 +11,9 @@ def read(fname):
 
 
 data_files = [
-    "templates/{}".format(i)
-    for i in os.listdir("templates")
-    if os.path.isfile(f"templates/{i}")
+    "schemata/{}".format(i)
+    for i in os.listdir("schemata")
+    if os.path.isfile(f"schemata/{i}")
 ]
 
 setup(
@@ -27,9 +27,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     packages=["maruval"],
-    package_data={"maruvar": data_files},
+    package_data={"maruval": data_files},
     data_files=[("schemata", data_files)],
-    scripts=["bin/maruvar"],
+    scripts=["bin/maruval"],
     author_email="daniel.mcdonald@uzh.ch",
     license="MIT",
     keywords=[],

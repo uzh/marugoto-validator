@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/schema#",
   "$id": "http://github.com/uzh/marugoto-validator",
-  "title": "notebookEntry",
-  "description": "notebookEntry",
+  "title": "topic",
+  "description": "topic",
   "properties": {
     "id": {
       "type": "null"
@@ -10,11 +10,14 @@
     "title": {
       "type": "string"
     },
-    "page": {
-      "type": [
-        "null",
-        "string"
-      ]
+    "image": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "startPage": {
+      "type": "string"
     }
   }
 }

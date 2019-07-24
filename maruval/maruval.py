@@ -46,7 +46,8 @@ def _get_json_files(path):
     """
     Recursively get JSON files.
     """
-    path = os.expanduser(path)
+    path = os.path.expanduser(path)
+    print('PATH', path)
     out = []
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -65,7 +66,12 @@ def _get_schemata():
     jsons = [i for i in os.listdir(data_dir) if i.endswith('.json')]
     for jso in jsons:
         with open(os.path.join(data_dir, jso), 'r') as fo:
-            schemata[os.path.splitext(jso)[0]] = json.load(fo)
+            try:
+                loaded = json.load(fo)
+            except:
+                print('FAIL: {}'.format(os.path.join(data_dir, jso)))
+                raise
+            schemata[os.path.splitext(jso)[0]] = loaded
     return schemata
 
 
@@ -84,7 +90,8 @@ def _get_correct_schema(json_file, schemata):
     """
     no_ext = os.path.basename(os.path.splitext(json_file)[0])
     schema_name = ''.join([i for i in no_ext if i.isalpha()])
-    return Draft7Validator.check_schema(schemata[schema_name])
+    Draft7Validator.check_schema(schemata[schema_name])
+    return schemata[schema_name]
 
 
 def _locate_schemata():
@@ -103,7 +110,7 @@ def _locate_schemata():
     raise ValueError("No schemata found in: {}".format(dirs))
 
 
-def validate(path, fail_first=False, warnings=True):
+def validate(path=None, fail_first=False, warnings=True):
     """
     Main validator routine
 
@@ -115,6 +122,7 @@ def validate(path, fail_first=False, warnings=True):
     schemata = _get_schemata()
     for json_file in to_check:
         schema = _get_correct_schema(json_file, schemata)
+        print('Validating {} with {}'.format(json_file, schema))
         try:
             with open(json_file, 'r') as f:
                 data = json.load(f)
@@ -135,4 +143,4 @@ def validate(path, fail_first=False, warnings=True):
 
 
 if __name__ == "__main__":
-    validate(*_parse_cmdline_args())
+    validate(**_parse_cmdline_args())
