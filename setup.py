@@ -13,7 +13,7 @@ def read(fname):
 data_files = [
     "schemata/{}".format(i)
     for i in os.listdir("schemata")
-    if os.path.isfile(f"schemata/{i}")
+    if os.path.isfile("schemata/{}".format(i))
 ]
 
 setup(
@@ -29,7 +29,7 @@ setup(
     packages=["maruval"],
     package_data={"maruval": data_files},
     data_files=[("schemata", data_files)],
-    scripts=["bin/maruval"],
+    scripts=["bin/maruval", "bin/marufind", "bin/marupretty"],
     author_email="daniel.mcdonald@uzh.ch",
     license="MIT",
     keywords=[],
