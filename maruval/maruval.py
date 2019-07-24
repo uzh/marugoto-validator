@@ -5,8 +5,8 @@ import json
 import os
 import sys
 
-from jsonschema import validate as schema_validate
 from jsonschema import Draft7Validator
+from jsonschema import validate as schema_validate
 from jsonschema.exceptions import ValidationError
 
 
