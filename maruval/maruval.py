@@ -49,7 +49,7 @@ def _get_json_files(path):
     path = os.path.expanduser(path)
     print("Validating content at {}".format(path))
     out = []
-    for root, dirs, files in os.walk(path):
+    for root, _, files in os.walk(path):
         for file in files:
             if file.endswith(".json"):
                 out.append(os.path.join(root, file))

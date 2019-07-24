@@ -115,7 +115,7 @@ def finder(inverse=False, any_of=False, only=False, json_types=None, path=None):
     path = os.path.expanduser(path)
     _explain(inverse, any_of, only, json_types, path)
     print(mi)
-    for root, dirs, files in os.walk(path):
+    for root, dirs, _ in os.walk(path):
         for folder in sorted(dirs):
             folder = os.path.join(root, folder)
             if _check_folder(folder, inverse, any_of, only, json_types):
