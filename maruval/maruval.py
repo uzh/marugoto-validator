@@ -20,12 +20,12 @@ def _parse_cmdline_args():
     parser = argparse.ArgumentParser(description="Validate marugoto game content.")
 
     parser.add_argument(
-        "-w",
-        "--warnings",
+        "-nw",
+        "--no-warnings",
         default=True,
         action="store_true",
         required=False,
-        help="Display warnings",
+        help="Do not show warnings",
     )
 
     parser.add_argument(
@@ -50,7 +50,7 @@ def _get_json_files(path):
     out = []
     for root, dirs, files in os.walk(path):
         for file in files:
-            if file.endswith('.json'):
+            if file.endswith(".json"):
                 out.append(os.path.join(root, file))
     return out
 
@@ -61,10 +61,10 @@ def _get_schemata():
     """
     schemata = dict()
     # hopfully, find the schemata folder?
-    data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'schemata')
-    jsons = [i for i in os.listdir(data_dir) if i.endswith('.json')]
+    data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "schemata")
+    jsons = [i for i in os.listdir(data_dir) if i.endswith(".json")]
     for jso in jsons:
-        with open(os.path.join(data_dir, jso), 'r') as fo:
+        with open(os.path.join(data_dir, jso), "r") as fo:
             loaded = json.load(fo)
             schemata[os.path.splitext(jso)[0]] = loaded
     return schemata
@@ -75,7 +75,7 @@ def _print_errors(errors):
     Nicely print out errors
     """
     for err, filename in errors:
-        form = 'Validation error for: {}\n\n{}'.format(filename, err)
+        form = "Validation error for: {}\n\n{}".format(filename, err)
         print(form)
 
 
@@ -84,7 +84,7 @@ def _get_correct_schema(json_file, schemata):
     Get correct validation schema based on filename
     """
     no_ext = os.path.basename(os.path.splitext(json_file)[0])
-    schema_name = ''.join([i for i in no_ext if i.isalpha()])
+    schema_name = "".join([i for i in no_ext if i.isalpha()])
     Draft7Validator.check_schema(schemata[schema_name])
     return schemata[schema_name]
 
@@ -105,7 +105,7 @@ def _locate_schemata():
     raise ValueError("No schemata found in: {}".format(dirs))
 
 
-def validate(path=None, fail_first=False, warnings=True):
+def validate(path=None, fail_first=False, no_warnings=False):
     """
     Main validator routine
 
@@ -118,21 +118,19 @@ def validate(path=None, fail_first=False, warnings=True):
     for json_file in to_check:
         schema = _get_correct_schema(json_file, schemata)
         try:
-            with open(json_file, 'r') as f:
+            with open(json_file, "r") as f:
                 data = json.load(f)
         except json.JSONDecodeError as err:
-            if fail_first:
-                _print_errors([(err, json_file)])
-                raise
             errors.append((err, json_file))
+            if fail_first:
+                break
             continue
         try:
             schema_validate(instance=data, schema=schema)
         except ValidationError as err:
-            if fail_first:
-                _print_errors([(err, json_file)])
-                raise
             errors.append((err, json_file))
+            if fail_first:
+                break
     _print_errors(errors)
 
 
