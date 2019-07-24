@@ -47,11 +47,16 @@ def _get_json_files(path):
     Recursively get JSON files.
     """
     path = os.path.expanduser(path)
+    print("Validating content at {}".format(path))
     out = []
     for root, dirs, files in os.walk(path):
         for file in files:
             if file.endswith(".json"):
                 out.append(os.path.join(root, file))
+    if not out:
+        raise OSError("No .json found at {}.".format(os.path.abspath(path)))
+    else:
+        print("{} JSON files found.".format(len(out)))
     return out
 
 
@@ -74,9 +79,14 @@ def _print_errors(errors):
     """
     Nicely print out errors
     """
-    for err, filename in errors:
-        form = "Validation error for: {}\n\n{}".format(filename, err)
-        print(form)
+    eq = "=" * 100
+    mi = "-" * 100
+    if errors:
+        print(eq)
+    for i, (err, filename, invalid_syntax) in enumerate(errors, start=1):
+        errname = "Content" if not invalid_syntax else "Syntax"
+        form = "Problem #{} -- {} error in {}\n{}\n\n{}\n\n{}"
+        print(form.format(i, errname, filename, mi, err, eq))
 
 
 def _get_correct_schema(json_file, schemata):
@@ -121,14 +131,14 @@ def validate(path=None, fail_first=False, no_warnings=False):
             with open(json_file, "r") as f:
                 data = json.load(f)
         except json.JSONDecodeError as err:
-            errors.append((err, json_file))
+            errors.append((err, json_file, True))
             if fail_first:
                 break
             continue
         try:
             schema_validate(instance=data, schema=schema)
         except ValidationError as err:
-            errors.append((err, json_file))
+            errors.append((err, json_file, False))
             if fail_first:
                 break
     _print_errors(errors)
