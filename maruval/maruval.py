@@ -47,7 +47,6 @@ def _get_json_files(path):
     Recursively get JSON files.
     """
     path = os.path.expanduser(path)
-    print('PATH', path)
     out = []
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -66,11 +65,7 @@ def _get_schemata():
     jsons = [i for i in os.listdir(data_dir) if i.endswith('.json')]
     for jso in jsons:
         with open(os.path.join(data_dir, jso), 'r') as fo:
-            try:
-                loaded = json.load(fo)
-            except:
-                print('FAIL: {}'.format(os.path.join(data_dir, jso)))
-                raise
+            loaded = json.load(fo)
             schemata[os.path.splitext(jso)[0]] = loaded
     return schemata
 
@@ -80,7 +75,7 @@ def _print_errors(errors):
     Nicely print out errors
     """
     for err, filename in errors:
-        form = '{}: {}'.format(filename, err)
+        form = 'Validation error for: {}\n\n{}'.format(filename, err)
         print(form)
 
 
@@ -122,7 +117,6 @@ def validate(path=None, fail_first=False, warnings=True):
     schemata = _get_schemata()
     for json_file in to_check:
         schema = _get_correct_schema(json_file, schemata)
-        print('Validating {} with {}'.format(json_file, schema))
         try:
             with open(json_file, 'r') as f:
                 data = json.load(f)

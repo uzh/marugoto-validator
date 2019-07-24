@@ -17,7 +17,7 @@
       "type": "integer"
     },
     "showInNotebook": {
-      "type": "bool"
+      "type": "boolean"
     },
     "showInNotebookAt": {
       "type": [

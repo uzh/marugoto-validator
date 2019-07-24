@@ -23,7 +23,15 @@
       ]
     },
     "time": {
-      "type": "number"
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "number"
+        },
+        "isAbsolute": {
+          "type": "boolean"
+        }
+      }
     },
     "money": {
       "amount": {
