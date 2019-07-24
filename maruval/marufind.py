@@ -109,8 +109,8 @@ def _check_folder(folder, inverse, any_of, only, json_types):
 
 
 def finder(inverse=False, any_of=False, only=False, json_types=None, path=None):
-    eq = '=' * 80
-    mi = '-' * 80
+    eq = "=" * 80
+    mi = "-" * 80
     print(eq)
     path = os.path.expanduser(path)
     _explain(inverse, any_of, only, json_types, path)
