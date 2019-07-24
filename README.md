@@ -79,11 +79,13 @@ marufind -only page,mail,dialog <path-to-content>
 marufind -not -only page,mail,dialog <path-to-content>
 ```
 
+# Show help
+
 ```bash
 marufind --help
 ```
 
-### `marupretty`: tidy up a file or content directory
+### `marupretty`: bash utility to tidy up a file or content directory, requires [`jq`](https://stedolan.github.io/jq/)
 
 ```bash
 marupretty <path-to-content>
