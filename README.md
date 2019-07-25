@@ -42,7 +42,6 @@ git clone https://github.com/uzh/maruval && cd maruval && python.setup.py instal
 * `marufind` a utility to find folders with particular contents
 * `marupretty`: pretty-print a JSON file or all files in a directory
 
-
 ### `maruval`: validate content
 
 The main tool, *maruval*, checks for syntax and content errors in your JSON data. Use it on the command line like this:
@@ -55,12 +54,6 @@ Optional arguments:
 
 * `-f`/`--fail-first` will stop *maruval* after first error
 * `-nw`/`--no-warnings` will suppress warning messages
-
-## Show help
-
-```bash
-maruval --help
-```
 
 ### `marufind`: find particular content directories
 
@@ -79,14 +72,17 @@ marufind -only page,mail,dialog <path-to-content>
 marufind -not -only page,mail,dialog <path-to-content>
 ```
 
-# Show help
-
-```bash
-marufind --help
-```
-
 ### `marupretty`: bash utility to tidy up a file or content directory, requires [`jq`](https://stedolan.github.io/jq/)
 
 ```bash
 marupretty <path-to-content>
+```
+
+### Getting help
+
+The following will tell you how to use the tools:
+
+```bash
+maruval --help
+marufind --help
 ```

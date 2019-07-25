@@ -32,10 +32,8 @@
       ]
     },
     "audio": {
-      "type": [
-        "null",
-        "string"
-      ]
+      "type": "string",
+      "regex": ".*\\.mp3$"
     }
   }
 }

@@ -142,6 +142,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
             if fail_first:
                 break
     _print_errors(errors)
+    print('All done. {} errors found.'.format(len(errors)))
 
 
 if __name__ == "__main__":

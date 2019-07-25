@@ -37,7 +37,8 @@
     "images": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "regex": ".*\\.jpg$"
       }
     },
     "caption": {
