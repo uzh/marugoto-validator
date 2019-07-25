@@ -58,10 +58,10 @@ Optional arguments:
 Example output (on some purposely broken data):
 
 ```bash
-maruval PlantationLives/
+danny@thinkpad:~/marugoto/content$ maruval PlantationLives/
 ```
 
-```
+```c
 Validating content at PlantationLives/
 868 JSON files found.
 
@@ -94,7 +94,13 @@ Expecting property name enclosed in double quotes: line 5 column 26 (char 94)
 All done. 3 errors found. 865 files OK.
 ```
 
+
 ### `marufind`: find particular content directories
+
+This utility takes two required arguments: the first is a comma-separated list of JSON file types; the second is the path to the dataset.
+
+The default mode of the tool is to show directories that contain all the listed JSON file types. You can use the `-any` or `-only` flags to match directories containing any of the listed types, or only the listed types. The optional `-not` flag will invert the results.
+
 
 ```bash
 # show directories containing both a videoComponent and textExercise file
@@ -113,13 +119,15 @@ marufind -not -only page,mail,dialog <path-to-content>
 
 ### `marupretty`: bash utility to tidy up a file or content directory, requires [`jq`](https://stedolan.github.io/jq/)
 
+This utility will format all files in the given directory, so you don't have to worry too much about whitespace and so on when modifying JSON files by hand.
+
 ```bash
 marupretty <path-to-content>
 ```
 
 ### Getting help
 
-The following will tell you how to use the tools:
+The following commands can be used to get more information about the usage of the tools:
 
 ```bash
 maruval --help
