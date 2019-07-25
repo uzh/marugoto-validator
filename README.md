@@ -61,7 +61,7 @@ Example output (on some purposely broken data):
 danny@thinkpad:~/marugoto/content$ maruval PlantationLives/
 ```
 
-```markdown
+```php
 Validating content at PlantationLives/
 868 JSON files found.
 
