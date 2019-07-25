@@ -66,10 +66,10 @@ Validating content at PlantationLives/
 868 JSON files found.
 
 ====================================================================================================
-Problem #1 -- Syntax error in PlantationLives/chapter3/2.3.5/imageComponent1.json
+Problem #1 -- Syntax error in PlantationLives/chapter2/2.2.10/page.json
 ----------------------------------------------------------------------------------------------------
 
-Expecting ',' delimiter: line 10 column 3 (char 144)
+Expecting property name enclosed in double quotes: line 5 column 26 (char 94)
 
 ====================================================================================================
 Problem #2 -- Content error in PlantationLives/chapter3/2.3.2/imageComponent1.json
@@ -84,10 +84,10 @@ On instance['numberOfColumns']:
     'cannot be string'
 
 ====================================================================================================
-Problem #3 -- Syntax error in PlantationLives/chapter2/2.2.10/page.json
+Problem #3 -- Syntax error in PlantationLives/chapter3/2.3.5/imageComponent1.json
 ----------------------------------------------------------------------------------------------------
 
-Expecting property name enclosed in double quotes: line 5 column 26 (char 94)
+Expecting ',' delimiter: line 10 column 3 (char 144)
 
 ====================================================================================================
 

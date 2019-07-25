@@ -126,7 +126,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
     to_check = _get_json_files(path)
     schemata = _get_schemata()
     ok = 0
-    for json_file in to_check:
+    for json_file in sorted(to_check):
         schema = _get_correct_schema(json_file, schemata)
         try:
             with open(json_file, "r") as f:
