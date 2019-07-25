@@ -33,13 +33,13 @@ Once you have *Python*, *pip3*/*pip*, and maybe `jq`, run the following:
 ```bash
 pip3 install maruval
 # or, from the git repo:
-git clone https://github.com/uzh/maruval && cd maruval && python.setup.py install
+git clone https://github.com/uzh/marugoto-validator && cd marugoto-validator && python.setup.py install
 ```
 
 ## Commands
 
 * `maruval`: validate marugoto data
-* `marufind` a utility to find folders with particular contents
+* `marufind`: a utility to find folders with particular contents
 * `marupretty`: pretty-print a JSON file or all files in a directory
 
 ### `maruval`: validate content
@@ -54,6 +54,45 @@ Optional arguments:
 
 * `-f`/`--fail-first` will stop *maruval* after first error
 * `-nw`/`--no-warnings` will suppress warning messages
+
+Example output (on some purposely broken data):
+
+```bash
+maruval PlantationLives/
+```
+
+```
+Validating content at PlantationLives/
+868 JSON files found.
+
+====================================================================================================
+Problem #1 -- Syntax error in PlantationLives/chapter3/2.3.5/imageComponent1.json
+----------------------------------------------------------------------------------------------------
+
+Expecting ',' delimiter: line 10 column 3 (char 144)
+
+====================================================================================================
+Problem #2 -- Content error in PlantationLives/chapter3/2.3.2/imageComponent1.json
+----------------------------------------------------------------------------------------------------
+
+'cannot be string' is not of type 'integer'
+
+Failed validating 'type' in schema['properties']['numberOfColumns']:
+    {'type': 'integer'}
+
+On instance['numberOfColumns']:
+    'cannot be string'
+
+====================================================================================================
+Problem #3 -- Syntax error in PlantationLives/chapter2/2.2.10/page.json
+----------------------------------------------------------------------------------------------------
+
+Expecting property name enclosed in double quotes: line 5 column 26 (char 94)
+
+====================================================================================================
+
+All done. 3 errors found. 865 files OK.
+```
 
 ### `marufind`: find particular content directories
 

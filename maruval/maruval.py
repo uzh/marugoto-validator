@@ -47,7 +47,7 @@ def _get_json_files(path):
     Recursively get JSON files.
     """
     path = os.path.expanduser(path)
-    print("Validating content at {}".format(path))
+    print("\nValidating content at {}".format(path))
     out = []
     for root, _, files in os.walk(path):
         for file in files:
@@ -82,7 +82,7 @@ def _print_errors(errors):
     eq = "=" * 100
     mi = "-" * 100
     if errors:
-        print(eq)
+        print("\n" + eq)
     for i, (err, filename, invalid_syntax) in enumerate(errors, start=1):
         errname = "Content" if not invalid_syntax else "Syntax"
         form = "Problem #{} -- {} error in {}\n{}\n\n{}\n\n{}"
@@ -125,6 +125,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
     errors = list()
     to_check = _get_json_files(path)
     schemata = _get_schemata()
+    ok = 0
     for json_file in to_check:
         schema = _get_correct_schema(json_file, schemata)
         try:
@@ -141,8 +142,10 @@ def validate(path=None, fail_first=False, no_warnings=False):
             errors.append((err, json_file, False))
             if fail_first:
                 break
+            continue
+        ok += 1
     _print_errors(errors)
-    print('All done. {} errors found.'.format(len(errors)))
+    print("\nAll done. {} errors found. {} files OK.\n".format(len(errors), ok))
 
 
 if __name__ == "__main__":
