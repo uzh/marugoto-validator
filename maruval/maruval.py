@@ -50,13 +50,11 @@ def _get_json_files(path):
     print("\nValidating content at {}".format(path))
     out = []
     for root, _, files in os.walk(path):
-        for file in files:
-            if file.endswith(".json"):
-                out.append(os.path.join(root, file))
+        jsons = [os.path.join(root, f) for f in files if f.endswith('.json')]
+        out.extend(jsons)
     if not out:
         raise OSError("No .json found at {}.".format(os.path.abspath(path)))
-    else:
-        print("{} JSON files found.".format(len(out)))
+    print("{} JSON files found.".format(len(out)))
     return out
 
 
@@ -66,12 +64,12 @@ def _get_schemata():
     """
     schemata = dict()
     # hopfully, find the schemata folder?
-    data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "schemata")
+    data_dir = _locate_schemata_dir()
     jsons = [i for i in os.listdir(data_dir) if i.endswith(".json")]
     for jso in jsons:
         with open(os.path.join(data_dir, jso), "r") as fo:
             loaded = json.load(fo)
-            schemata[os.path.splitext(jso)[0]] = loaded
+        schemata[os.path.splitext(jso)[0]] = loaded
     return schemata
 
 
@@ -81,8 +79,7 @@ def _print_errors(errors):
     """
     eq = "=" * 100
     mi = "-" * 100
-    if errors:
-        print("\n" + eq)
+    print("\n" + eq)
     for i, (err, filename, invalid_syntax) in enumerate(errors, start=1):
         errname = "Content" if not invalid_syntax else "Syntax"
         form = "Problem #{} -- {} error in {}\n{}\n\n{}\n\n{}"
@@ -99,7 +96,7 @@ def _get_correct_schema(json_file, schemata):
     return schemata[schema_name]
 
 
-def _locate_schemata():
+def _locate_schemata_dir():
     """
     schemata dir seems to move around depending on how you install!?
     """
@@ -107,12 +104,13 @@ def _locate_schemata():
     first = os.path.dirname(fpath)
     second = os.path.dirname(first)
     third = sys.prefix
-    fourth = os.path.join(third, "maruvar")
+    fourth = os.path.join(third, "maruval")
     dirs = [first, second, third, fourth]
     for path in dirs:
-        if os.path.isdir(os.path.join(path, "schemata")):
-            return os.path.join(path, "schemata")
-    raise ValueError("No schemata found in: {}".format(dirs))
+        full = os.path.join(path, "schemata")
+        if os.path.isdir(full):
+            return full
+    raise ValueError("No schemata dir found at: {}".format(dirs))
 
 
 def validate(path=None, fail_first=False, no_warnings=False):
@@ -128,14 +126,14 @@ def validate(path=None, fail_first=False, no_warnings=False):
     ok = 0
     for json_file in sorted(to_check):
         schema = _get_correct_schema(json_file, schemata)
-        try:
-            with open(json_file, "r") as f:
+        with open(json_file, "r") as f:
+            try:
                 data = json.load(f)
-        except json.JSONDecodeError as err:
-            errors.append((err, json_file, True))
-            if fail_first:
-                break
-            continue
+            except json.JSONDecodeError as err:
+                errors.append((err, json_file, True))
+                if fail_first:
+                    break
+                continue
         try:
             schema_validate(instance=data, schema=schema)
         except ValidationError as err:
@@ -144,7 +142,8 @@ def validate(path=None, fail_first=False, no_warnings=False):
                 break
             continue
         ok += 1
-    _print_errors(errors)
+    if errors:
+        _print_errors(errors)
     print("\nAll done. {} errors found. {} files OK.\n".format(len(errors), ok))
 
 
