@@ -121,14 +121,16 @@ def _get_first_file(folder, atom):
     Get a representative file from this folder for quicklinking in atom
     """
     if not atom:
-        return ''
+        return ""
     files = [i for i in os.listdir(folder) if os.path.isfile(os.path.join(folder, i))]
     if files:
         return sorted(files)[0]
-    return ''
+    return ""
 
 
-def finder(inverse=False, any_of=False, only=False, json_types=None, path=None, atom=False):
+def finder(
+    inverse=False, any_of=False, only=False, json_types=None, path=None, atom=False
+):
     eq = "=" * 80
     mi = "-" * 80
     print(eq)
@@ -140,7 +142,7 @@ def finder(inverse=False, any_of=False, only=False, json_types=None, path=None, 
             folder = os.path.join(root, folder)
             if _check_folder(folder, inverse, any_of, only, json_types):
                 first_file = _get_first_file(folder, atom)
-                form = os.path.join(os.path.abspath(folder), first_file).rstrip('/')
+                form = os.path.join(os.path.abspath(folder), first_file).rstrip("/")
                 print("Matching directory: {}".format(form))
     print(eq)
 

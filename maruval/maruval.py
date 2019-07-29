@@ -87,7 +87,7 @@ def _print_errors(errors):
     for i, (err, filename, invalid_syntax) in enumerate(errors, start=1):
         # add line number of syntax errors
         if invalid_syntax:
-            filename = '{}:{}'.format(filename, err.lineno)
+            filename = "{}:{}".format(filename, err.lineno)
         errname = "Content" if not invalid_syntax else "Syntax"
         form = "Problem #{} -- {} error in {}\n{}\n\n{}\n\n{}"
         print(form.format(i, errname, filename, mi, err, eq))
@@ -153,7 +153,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
     if len(to_check) > 1:
         msg += ". {} files OK.\n".format(ok)
     else:
-        msg += ' in {}'.format(to_check[0])
+        msg += " in {}".format(to_check[0])
     print(msg)
 
 
