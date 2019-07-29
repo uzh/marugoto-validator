@@ -2,13 +2,14 @@ import os
 import shutil
 import subprocess
 
+from .maruval import _locate_schemata_dir
+
 
 def configure():
     """
     python -m maruval.atom
     """
-    target = os.path.dirname(os.path.dirname(__file__))
-    target = os.path.join(target, "schemata", "process-palette.json")
+    target = os.path.join(_locate_schemata_dir(), "process-palette.json")
     assert os.path.isfile(target), "Does not exist: {}".format(target)
     shutil.copyfile(target, os.path.expanduser("~/.atom/process-palette.json"))
     subprocess.call("apm install process-palette".split())
