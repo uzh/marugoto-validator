@@ -2,7 +2,7 @@
 
 Command line utilities for [marugoto](https://github.com/uzh/marugoto) content
 
-> Version 0.1.1
+> Version 0.2.0
 
 [![Build Status](https://travis-ci.org/uzh/maruval.svg?branch=master)](https://travis-ci.org/uzh/maruval)
 [![codecov.io](https://codecov.io/gh/uzh/maruval/branch/master/graph/badge.svg)](https://codecov.io/gh/uzh/maruval)
