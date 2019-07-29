@@ -42,6 +42,19 @@ git clone https://github.com/uzh/marugoto-validator && cd marugoto-validator && 
 * `marufind`: a utility to find folders with particular contents
 * `marupretty`: pretty-print a JSON file or all files in a directory
 
+## Configuring *maruval* for *Atom*
+
+Each tool can be run from the command line, but perhaps more usefully, they can be run from within an Atom editing session.
+
+Run the following to configure Atom:
+
+```bash
+python -m maruval.atom
+```
+
+Then, restart Atom and type `maruval` into the command palette to see the available commands.
+
+
 ### `maruval`: validate content
 
 The main tool, *maruval*, checks for syntax and content errors in your JSON data. Use it on the command line like this:

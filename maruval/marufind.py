@@ -74,6 +74,15 @@ def _parse_cmdline_args():
     )
 
     parser.add_argument(
+        "-atom",
+        "--atom",
+        default=False,
+        action="store_true",
+        required=False,
+        help="Atom compatibility mode",
+    )
+
+    parser.add_argument(
         "json_types", type=listed, help="Comma-separated list of JSON file types"
     )
 
@@ -107,18 +116,32 @@ def _check_folder(folder, inverse, any_of, only, json_types):
     return match if not inverse else not match
 
 
-def finder(inverse=False, any_of=False, only=False, json_types=None, path=None):
+def _get_first_file(folder, atom):
+    """
+    Get a representative file from this folder for quicklinking in atom
+    """
+    if not atom:
+        return ''
+    files = [i for i in os.listdir(folder) if os.path.isfile(os.path.join(folder, i))]
+    if files:
+        return sorted(files)[0]
+    return ''
+
+
+def finder(inverse=False, any_of=False, only=False, json_types=None, path=None, atom=False):
     eq = "=" * 80
     mi = "-" * 80
     print(eq)
     path = os.path.expanduser(path)
     _explain(inverse, any_of, only, json_types, path)
     print(mi)
-    for root, dirs, _ in os.walk(path):
+    for root, dirs, files in os.walk(path):
         for folder in sorted(dirs):
             folder = os.path.join(root, folder)
             if _check_folder(folder, inverse, any_of, only, json_types):
-                print("Matching directory: {}".format(os.path.abspath(folder)))
+                first_file = _get_first_file(folder, atom)
+                form = os.path.join(os.path.abspath(folder), first_file).rstrip('/')
+                print("Matching directory: {}".format(form))
     print(eq)
 
 

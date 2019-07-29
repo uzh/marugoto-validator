@@ -8,3 +8,4 @@ isort
 bump2version
 # Requirements of the package
 jsonschema==3.0.1
+setuptools

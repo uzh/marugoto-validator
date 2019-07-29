@@ -46,16 +46,17 @@ def _get_json_files(path):
     """
     Recursively get JSON files.
     """
-    path = os.path.expanduser(path)
+    path = os.path.abspath(os.path.expanduser(path))
     print("\nValidating content at {}".format(path))
-    out = []
-    for root, _, files in os.walk(path):
-        for file in files:
-            if file.endswith(".json"):
-                out.append(os.path.join(root, file))
+    out = [path] if os.path.isfile(path) else list()
+    if not out:
+        for root, _, files in os.walk(path):
+            for file in files:
+                if file.endswith(".json"):
+                    out.append(os.path.join(root, file))
     if not out:
         raise OSError("No .json found at {}.".format(os.path.abspath(path)))
-    else:
+    elif not os.path.isfile(path):
         print("{} JSON files found.".format(len(out)))
     return out
 
@@ -84,6 +85,9 @@ def _print_errors(errors):
     if errors:
         print("\n" + eq)
     for i, (err, filename, invalid_syntax) in enumerate(errors, start=1):
+        # add line number of syntax errors
+        if invalid_syntax:
+            filename = '{}:{}'.format(filename, err.lineno)
         errname = "Content" if not invalid_syntax else "Syntax"
         form = "Problem #{} -- {} error in {}\n{}\n\n{}\n\n{}"
         print(form.format(i, errname, filename, mi, err, eq))
@@ -145,7 +149,12 @@ def validate(path=None, fail_first=False, no_warnings=False):
             continue
         ok += 1
     _print_errors(errors)
-    print("\nAll done. {} errors found. {} files OK.\n".format(len(errors), ok))
+    msg = "\nAll done. {} errors found".format(len(errors))
+    if len(to_check) > 1:
+        msg += ". {} files OK.\n".format(ok)
+    else:
+        msg += ' in {}'.format(to_check[0])
+    print(msg)
 
 
 if __name__ == "__main__":
