@@ -1,7 +1,5 @@
 # maruval
 
-Command line utilities for [marugoto](https://github.com/uzh/marugoto) content
-
 > Version 0.2.1
 
 [![Build Status](https://travis-ci.org/uzh/maruval.svg?branch=master)](https://travis-ci.org/uzh/maruval)
@@ -9,38 +7,35 @@ Command line utilities for [marugoto](https://github.com/uzh/marugoto) content
 [![PyPI version](https://badge.fury.io/py/maruval.svg)](https://badge.fury.io/py/maruval)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 
+Command line utilities for [marugoto](https://github.com/uzh/marugoto) content
+
+* `maruval`: validate marugoto data
+* `marufind`: a utility to find folders with particular contents
+* `marupretty`: pretty-print a JSON file or all files in a directory
+
 ## Installing dependencies
 
 *maruval* is predominantly written Python, so your machine needs Python and the Python package manager *pip* for installation. You should already have Python.
 
-To check if you have *pip*, type `which pip3` and/or `which pip` into your command line. If either command returns a path to `pip`, you can proceed to `Installing maruval`.
+To check if you have *pip*, type `which pip` into your command line. If this returns a path to `pip`, you can proceed to `Installing maruval`.
 
-To install *pip*, run the following command:
+Otherwise, to install *pip*, run the following command:
 
 ```bash
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py && rm get-pip.py
 ```
 
 Now `which pip` should show a path to a *pip* executable.
-
-If you want to use `marupretty`, the JSON pretty printer, you'll need to have the `jq` utility installed. Get it [here](https://stedolan.github.io/jq/) and save it as `jq` in `/usr/bin`
-
 
 ## Installing *maruval*
 
 Once you have *Python*, *pip3*/*pip*, and maybe `jq`, run the following:
 
 ```bash
-pip3 install maruval
+pip install maruval
 # or, from the git repo:
 git clone https://github.com/uzh/marugoto-validator && cd marugoto-validator && python.setup.py install
 ```
-
-## Commands
-
-* `maruval`: validate marugoto data
-* `marufind`: a utility to find folders with particular contents
-* `marupretty`: pretty-print a JSON file or all files in a directory
 
 ## Configuring *maruval* for *Atom*
 
@@ -54,6 +49,19 @@ python -m maruval.atom
 
 Then, restart Atom and type `maruval` into the command palette to see the available commands.
 
+## Configuring *marupretty*
+
+If you want to use `marupretty`, the JSON pretty printer, you'll need to have the `jq` utility installed. Use the following command to do this:
+
+```bash
+# note: requires sudo
+sudo python -m maruval.jq
+# or, get it at https://stedolan.github.io/jq/ and save it as `jq` your PATH...
+```
+
+## Command line usage
+
+Below describes how to use each of the three tools from the command line.
 
 ### `maruval`: validate content
 

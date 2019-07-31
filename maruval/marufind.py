@@ -122,7 +122,11 @@ def _get_first_file(folder, atom):
     """
     if not atom:
         return ""
-    files = [i for i in os.listdir(folder) if os.path.isfile(os.path.join(folder, i))]
+    files = [
+        i
+        for i in os.listdir(folder)
+        if os.path.isfile(os.path.join(folder, i)) and not i.startswith(".")
+    ]
     if files:
         return sorted(files)[0]
     return ""
