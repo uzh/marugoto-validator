@@ -3,7 +3,7 @@
 # In place pretty-print all files in directory passed in
 # requires jq
 
-command -v jq >/dev/null 2>&1 || { echo >&2 "I require jq but it's not installed. Get it at https://stedolan.github.io/jq/. Aborting."; exit 1; } 
+command -v jq >/dev/null 2>&1 || { echo >&2 "I require jq, but it's not installed. Run `sudo python -m maruval.jq`, or get the util directly at https://stedolan.github.io/jq/. Aborting."; exit 1; } 
 
 if [[ -d $1 ]]; then
     for f in $(find $1 -name '*.json');
