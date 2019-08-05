@@ -135,7 +135,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
         with open(json_file, "r") as f:
             try:
                 data = json.load(f)
-            except json.JSONDecodeError as err:
+            except Exception as err:
                 errors.append((err, json_file, True))
                 if fail_first:
                     break
