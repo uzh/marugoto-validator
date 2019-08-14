@@ -9,6 +9,26 @@ from jsonschema import Draft7Validator
 from jsonschema import validate as schema_validate
 from jsonschema.exceptions import ValidationError
 
+# elements that contain either a filepath or a list of them
+IS_FILEPATH = {
+    "from",
+    "to",
+    "images",
+    "image",
+    "video",
+    "icon",
+    "speech",
+    "pageTransition",
+    "mail",
+    "page",
+    "affectedPage",
+    "affectedDialogResponse",
+    "affectedMail",
+    "affectedExercise",
+    "startPage",
+    "audio",
+}
+
 
 def _parse_cmdline_args():
     """
@@ -99,7 +119,7 @@ def _get_correct_schema(json_file, schemata):
     no_ext = os.path.basename(os.path.splitext(json_file)[0])
     schema_name = "".join([i for i in no_ext if i.isalpha()])
     Draft7Validator.check_schema(schemata[schema_name])
-    return schemata[schema_name]
+    return schema_name, schemata[schema_name]
 
 
 def _locate_schemata_dir():
@@ -111,13 +131,31 @@ def _locate_schemata_dir():
     second = os.path.dirname(first)
     third = sys.prefix
     fourth = os.path.join(third, "maruval")
-    fifth = os.path.expanduser('~/marugoto-validator')
+    fifth = os.path.expanduser("~/marugoto-validator")
     dirs = [first, second, third, fourth, fifth]
     for path in dirs:
         full = os.path.join(path, "schemata")
         if os.path.isdir(full):
             return full
     raise ValueError("No schemata dir found at: {}".format(dirs))
+
+
+def _custom_validate(fname, data):
+    """
+    Custom validation for files. Right now, just check filepath is valid.
+    """
+    for key, value in data.items():
+        if isinstance(value, dict):
+            _custom_validate(fname, value)
+        if key not in IS_FILEPATH:
+            continue
+        to_check = value if isinstance(value, list) else [value]
+        for item in to_check:
+            if item is None:
+                continue
+            error = "{} has key '{}', but {} not found.".format(fname, key, item)
+            if not os.path.isfile(item):
+                raise OSError(error)
 
 
 def validate(path=None, fail_first=False, no_warnings=False):
@@ -132,7 +170,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
     schemata = _get_schemata()
     ok = 0
     for json_file in sorted(to_check):
-        schema = _get_correct_schema(json_file, schemata)
+        schema_name, schema = _get_correct_schema(json_file, schemata)
         with open(json_file, "r") as f:
             try:
                 data = json.load(f)
@@ -143,7 +181,9 @@ def validate(path=None, fail_first=False, no_warnings=False):
                 continue
         try:
             schema_validate(instance=data, schema=schema)
-        except ValidationError as err:
+            _custom_validate(json_file, data)
+
+        except (ValidationError, OSError) as err:
             errors.append((err, json_file, False))
             if fail_first:
                 break
