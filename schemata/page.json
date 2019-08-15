@@ -26,15 +26,40 @@
       "type": "boolean"
     },
     "money": {
-      "amount": {
-        "type": "number"
-      },
-      "time": {
-        "type": "null"
-      },
-      "chapter": {
-        "type": "null"
-      }
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "time": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "isAbsolute": {
+              "type": "boolean"
+            },
+            "amount": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "chapter": {
+      "type": "null"
     }
   }
 }
