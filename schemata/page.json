@@ -29,6 +29,9 @@
       "anyOf": [
         {
           "type": "object",
+          "required": [
+            "amount"
+          ],
           "properties": {
             "amount": {
               "type": "integer"
@@ -44,6 +47,10 @@
       "anyOf": [
         {
           "type": "object",
+          "required": [
+            "isAbsolute",
+            "time"
+          ],
           "properties": {
             "isAbsolute": {
               "type": "boolean"

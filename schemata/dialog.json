@@ -15,9 +15,13 @@
     },
     "receiveAfter": {
       "type": "object",
+      "required": [
+        "time",
+        "isAbsolute"
+      ],
       "properties": {
         "time": {
-          "type": "number"
+          "type": "integer"
         },
         "isAbsolute": {
           "type": "boolean"

@@ -16,7 +16,8 @@
     "receiveAfter": {
       "type": "object",
       "required": [
-        "time"
+        "time",
+        "isAbsolute"
       ],
       "properties": {
         "time": {
