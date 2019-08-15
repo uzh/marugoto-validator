@@ -29,7 +29,7 @@ setup(
     packages=["maruval"],
     package_data={"maruval": data_files},
     data_files=[("schemata", data_files)],
-    scripts=["bin/maruval", "bin/marufind", "bin/marupretty"],
+    scripts=["bin/maruval", "bin/marufind", "bin/marupretty", "bin/marusearch"],
     author_email="daniel.mcdonald@uzh.ch",
     license="MIT",
     keywords=[],
