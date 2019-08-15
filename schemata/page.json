@@ -48,7 +48,7 @@
             "isAbsolute": {
               "type": "boolean"
             },
-            "amount": {
+            "time": {
               "type": "integer"
             }
           }
