@@ -39,7 +39,9 @@
     },
     "money": {
       "type": "object",
-      "required": ["amount"],
+      "required": [
+        "amount"
+      ],
       "properties": {
         "amount": {
           "type": "integer"
@@ -52,21 +54,25 @@
         "type": "object",
         "properties": {
           "pageCriteria": {
-            "type": [
-              "null",
-              "string"
+            "enum": [
+              null,
+              "visited",
+              "notVisited",
+              "visitedAny",
+              "notVisitedAny"
             ]
           },
           "exerciseCriteria": {
-            "type": [
-              "null",
-              "string"
+            "enum": [
+              null,
+              "correctInput",
+              "incorrectInput"
             ]
           },
           "mailCriteria": {
-            "type": [
-              "null",
-              "string"
+            "enum": [
+              null,
+              "reply"
             ]
           },
           "affectedExercise": {
