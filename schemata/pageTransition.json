@@ -23,7 +23,19 @@
       ]
     },
     "time": {
-      "type": "integer"
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "time": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
     },
     "money": {
       "type": "object",

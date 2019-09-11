@@ -47,9 +47,18 @@
       ]
     },
     "time": {
-      "type": [
-        "integer",
-        "null"
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "time": {
+              "type": "integer"
+            }
+          }
+        }
       ]
     },
     "chapter": {
