@@ -14,19 +14,7 @@
       ]
     },
     "receiveAfter": {
-      "type": "object",
-      "required": [
-        "time",
-        "isAbsolute"
-      ],
-      "properties": {
-        "time": {
-          "type": "integer"
-        },
-        "isAbsolute": {
-          "type": "boolean"
-        }
-      }
+      "type": "integer"
     },
     "page": {
       "type": [

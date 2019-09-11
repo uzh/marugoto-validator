@@ -44,26 +44,7 @@
       ]
     },
     "time": {
-      "anyOf": [
-        {
-          "type": "object",
-          "required": [
-            "isAbsolute",
-            "time"
-          ],
-          "properties": {
-            "isAbsolute": {
-              "type": "boolean"
-            },
-            "time": {
-              "type": "integer"
-            }
-          }
-        },
-        {
-          "type": "null"
-        }
-      ]
+      "type": ["integer", "null"]
     },
     "chapter": {
       "type": "null"

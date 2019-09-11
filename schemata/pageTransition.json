@@ -23,19 +23,7 @@
       ]
     },
     "time": {
-      "type": "object",
-      "required": [
-        "time",
-        "isAbsolute"
-      ],
-      "properties": {
-        "time": {
-          "type": "number"
-        },
-        "isAbsolute": {
-          "type": "boolean"
-        }
-      }
+      "type": "integer"
     },
     "money": {
       "type": "object",
@@ -66,13 +54,15 @@
             "enum": [
               null,
               "correctInput",
-              "incorrectInput"
+              "incorrectInput",
+              "noInput"
             ]
           },
           "mailCriteria": {
             "enum": [
               null,
-              "reply"
+              "reply",
+              "read"
             ]
           },
           "affectedExercise": {
