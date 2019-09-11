@@ -34,7 +34,10 @@
           ],
           "properties": {
             "amount": {
-              "type": "integer"
+              "type": [
+                "null",
+                "integer"
+              ]
             }
           }
         },
@@ -44,7 +47,10 @@
       ]
     },
     "time": {
-      "type": ["integer", "null"]
+      "type": [
+        "integer",
+        "null"
+      ]
     },
     "chapter": {
       "type": "null"

@@ -14,7 +14,15 @@
       ]
     },
     "receiveAfter": {
+      "type": "object",
+      "required": [
+        "time"
+      ],
+      "properties": {
+        "time": {
           "type": "integer"
+        }
+      }
     },
     "page": {
       "type": [
