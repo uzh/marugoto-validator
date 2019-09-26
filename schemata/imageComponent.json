@@ -20,7 +20,11 @@
       "type": "boolean"
     },
     "showInNotebookAt": {
-      "enum": [null, "pageEnter", "pageExit"]
+      "enum": [
+        null,
+        "pageEnter",
+        "pageExit"
+      ]
     },
     "page": {
       "type": [
