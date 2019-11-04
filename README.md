@@ -1,6 +1,6 @@
 # maruval
 
-> Version 1.0.1
+> Version 1.0.2
 
 [![Build Status](https://travis-ci.org/uzh/maruval.svg?branch=master)](https://travis-ci.org/uzh/maruval)
 [![codecov.io](https://codecov.io/gh/uzh/maruval/branch/master/graph/badge.svg)](https://codecov.io/gh/uzh/maruval)
