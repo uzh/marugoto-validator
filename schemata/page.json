@@ -19,9 +19,6 @@
     "timerVisible": {
       "type": "boolean"
     },
-    "notebookVisible": {
-      "type": "boolean"
-    },
     "endOfTopic": {
       "type": "boolean"
     },
