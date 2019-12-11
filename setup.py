@@ -18,7 +18,7 @@ data_files = [
 
 setup(
     name="maruval",
-    version="1.0.2",  # bump2version will edit this automatically!
+    version="1.0.3",  # bump2version will edit this automatically!
     description="Validator for marugoto game content",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
