@@ -132,7 +132,8 @@ def _locate_schemata_dir():
     third = sys.prefix
     fourth = os.path.join(third, "maruval")
     fifth = os.path.expanduser("~/marugoto-validator")
-    dirs = [first, second, third, fourth, fifth]
+    sixth = "."
+    dirs = [first, second, third, fourth, fifth, sixth]
     for path in dirs:
         full = os.path.join(path, "schemata")
         if os.path.isdir(full):
