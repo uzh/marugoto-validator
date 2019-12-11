@@ -43,11 +43,7 @@ def _parse_cmdline_args():
     )
 
     parser.add_argument(
-        "-p",
-        "--pattern",
-        type=str,
-        required=True,
-        help="Pattern to be searched",
+        "-p", "--pattern", type=str, required=True, help="Pattern to be searched",
     )
 
     parser.add_argument("path", help="Path to the data directory")
@@ -69,7 +65,7 @@ def _check_file(path, pattern, times, inverse, regex):
     """
     Does file at this path contain pattern at least n times?
     """
-    with open(path, 'r') as fo:
+    with open(path, "r") as fo:
         text = fo.read()
     count = text.count(pattern) if not regex else len(re.findall(pattern, text))
     match = count >= int(times)
@@ -85,7 +81,7 @@ def searcher(inverse=False, pattern=None, times=1, path=None, regex=False):
     print(mi)
     for root, _, files in os.walk(path):
         for fname in sorted(files):
-            if not fname.endswith('.json'):
+            if not fname.endswith(".json"):
                 continue
             path = os.path.join(root, fname)
             if _check_file(path, pattern, times, inverse, regex):
