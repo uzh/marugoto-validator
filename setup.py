@@ -33,6 +33,6 @@ setup(
     author_email="daniel.mcdonald@uzh.ch",
     license="MIT",
     keywords=[],
-    install_requires=["jsonschema==3.0.1", "setuptools"],
+    install_requires=["jsonschema==3.2.0", "setuptools"],
     dependency_links=[],
 )
