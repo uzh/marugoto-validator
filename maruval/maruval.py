@@ -145,6 +145,10 @@ def _custom_validate(fname, data):
     """
     Custom validation for files. Right now, just check filepath is valid.
     """
+    internals = {"maruval", "marugoto-validator", "schemata"}
+    if any(i in fname for i in internals):
+        print("SKIPPING INTERNAL FILE: {}".format(fname))
+        return
     for key, value in data.items():
         if isinstance(value, dict):
             _custom_validate(fname, value)
