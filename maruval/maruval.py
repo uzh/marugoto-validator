@@ -106,7 +106,7 @@ def _print_errors(errors):
     for i, (err, filename, invalid_syntax) in enumerate(errors, start=1):
         # add line number of syntax errors
         if invalid_syntax:
-            filename = "{}:{}".format(filename, err.lineno)
+            filename = "{}:{}".format(filename, getattr(err, "lineno", "no-line"))
         errname = "Content" if not invalid_syntax else "Syntax"
         form = "Problem #{} -- {} error in {}\n{}\n\n{}\n\n{}"
         print(form.format(i, errname, filename, mi, err, eq))
