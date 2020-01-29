@@ -155,8 +155,12 @@ def _custom_validate(fname, data):
             if item is None:
                 continue
             error = "{} has key '{}', but {} not found.".format(fname, key, item)
-            if not os.path.isfile(item):
-                raise OSError(error)
+            try:
+                if not os.path.isfile(item):
+                    raise OSError(error)
+            except TypeError:
+                print('UNEXPECTED: {} item is {}'.format(fname, item))
+                raise
 
 
 def validate(path=None, fail_first=False, no_warnings=False):
