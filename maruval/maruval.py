@@ -163,7 +163,7 @@ def _custom_validate(fname, data):
                 if not os.path.isfile(item):
                     raise OSError(error)
             except TypeError:
-                print('UNEXPECTED: {} item is {}'.format(fname, item))
+                print("UNEXPECTED: {} item is {}".format(fname, item))
                 raise
 
 
@@ -205,6 +205,10 @@ def validate(path=None, fail_first=False, no_warnings=False):
     else:
         msg += " in {}".format(to_check[0])
     print(msg)
+    if len(errors):
+        sys.exit(1)
+    else:
+        sys.exit(0)
 
 
 if __name__ == "__main__":
