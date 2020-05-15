@@ -184,7 +184,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
     ok = 0
     for json_file in sorted(to_check):
         schema_name, schema = _get_correct_schema(json_file, schemata)
-        with open(json_file, "r") as f:
+        with open(json_file, "r", encoding="utf-8") as f:
             try:
                 data = json.load(f)
             except Exception as err:
