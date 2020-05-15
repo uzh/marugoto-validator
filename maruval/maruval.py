@@ -66,7 +66,6 @@ def _get_json_files(path):
     """
     Recursively get JSON files.
     """
-    path = os.path.abspath(os.path.expanduser(path))
     print("\nValidating content at {}".format(path))
     out = [path] if os.path.isfile(path) else list()
     if not out:
@@ -122,7 +121,7 @@ def _get_correct_schema(json_file, schemata):
     return schema_name, schemata[schema_name]
 
 
-def _locate_schemata_dir():
+def _locate_schemata_dir(path):
     """
     schemata dir seems to move around depending on how you install!?
     """
@@ -133,7 +132,8 @@ def _locate_schemata_dir():
     fourth = os.path.join(third, "maruval")
     fifth = os.path.expanduser("~/marugoto-validator")
     sixth = "."
-    dirs = [first, second, third, fourth, fifth, sixth]
+    seventh = path
+    dirs = [first, second, third, fourth, fifth, sixth, path]
     for path in dirs:
         full = os.path.join(path, "schemata")
         if os.path.isdir(full):
@@ -141,7 +141,7 @@ def _locate_schemata_dir():
     raise ValueError("No schemata dir found at: {}".format(dirs))
 
 
-def _custom_validate(fname, data):
+def _custom_validate(fname, data, path):
     """
     Custom validation for files. Right now, just check filepath is valid.
     """
@@ -158,7 +158,8 @@ def _custom_validate(fname, data):
         for item in to_check:
             if item is None:
                 continue
-            item = os.path.abspath(os.path.expanduser(item))
+            if item != os.path.join(path, item):
+                item = os.path.join(path, item)
             error = "{} has key '{}', but {} not found.".format(fname, key, item)
             try:
                 if not os.path.isfile(item):
@@ -175,9 +176,11 @@ def validate(path=None, fail_first=False, no_warnings=False):
     Iterate over all JSON files, check that they can be loaded, and then run jsonschema.
     Handle fail fast option both during loading and validating.
     """
+    # get the absolute expanded path and always use this
+    path = os.path.abspath(os.path.expanduser(path))
     errors = list()
     to_check = _get_json_files(path)
-    schemata = _get_schemata()
+    schemata = _get_schemata(path)
     ok = 0
     for json_file in sorted(to_check):
         schema_name, schema = _get_correct_schema(json_file, schemata)
@@ -191,7 +194,7 @@ def validate(path=None, fail_first=False, no_warnings=False):
                 continue
         try:
             schema_validate(instance=data, schema=schema)
-            _custom_validate(json_file, data)
+            _custom_validate(json_file, data, path)
 
         except (ValidationError, OSError) as err:
             errors.append((err, json_file, False))
