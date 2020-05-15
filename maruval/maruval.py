@@ -151,7 +151,7 @@ def _custom_validate(fname, data, path):
         return
     for key, value in data.items():
         if isinstance(value, dict):
-            _custom_validate(fname, value)
+            _custom_validate(fname, value, path)
         if key not in IS_FILEPATH:
             continue
         to_check = value if isinstance(value, list) else [value]
