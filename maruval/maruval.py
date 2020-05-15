@@ -80,13 +80,13 @@ def _get_json_files(path):
     return out
 
 
-def _get_schemata():
+def _get_schemata(path):
     """
     Load all our JSON schemata into a dict with file basenames as keys
     """
     schemata = dict()
     # hopfully, find the schemata folder?
-    data_dir = _locate_schemata_dir()
+    data_dir = _locate_schemata_dir(path)
     jsons = [i for i in os.listdir(data_dir) if i.endswith(".json")]
     for jso in jsons:
         with open(os.path.join(data_dir, jso), "r") as fo:
