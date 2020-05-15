@@ -158,6 +158,7 @@ def _custom_validate(fname, data):
         for item in to_check:
             if item is None:
                 continue
+            item = os.path.abspath(os.path.expanduser(item))
             error = "{} has key '{}', but {} not found.".format(fname, key, item)
             try:
                 if not os.path.isfile(item):
